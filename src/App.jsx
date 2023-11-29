@@ -9,6 +9,7 @@ import Pie from "./pages/Pie";
 import Form from "./pages/Form";
 import Calendar from "./pages/Calendar";
 import Line from "./pages/Line";
+import Sidebar from "./components/global/Sidebar";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -17,20 +18,22 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <Router>
         <div className="app flex relative">
+          <Sidebar/>
           <main className="content">
             <Topbar />
-            <Router>
+            
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/form" element={<Form />} />
                 <Route path="/pie-chart" element={<Pie />} />
-                <Route path="/pie-chart" element={<Line />} />
+                <Route path="/line-chart" element={<Line />} />
               </Routes>
-            </Router>
           </main>
         </div>
+            </Router>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
