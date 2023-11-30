@@ -6,11 +6,12 @@ import Topbar from "./components/global/Topbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Pie from "./pages/Pie";
-import Form from "./pages/Form";
+
 import Calendar from "./pages/Calendar";
 import Line from "./pages/Line";
 import Sidebar from "./components/global/Sidebar";
 import List from "./pages/doctor/List";
+import Form from "./pages/doctor/Form";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -31,7 +32,7 @@ function App() {
                 <Route path="/doctor/create" element={<Form />} />
                 <Route path="/doctor/list" element={<List />} />
                 <Route path="/calendar" element={<Calendar />} />
-                <Route path="/form" element={<Form />} />
+
                 <Route path="/pie-chart" element={<Pie />} />
                 <Route path="/line-chart" element={<Line />} />
               </Routes>

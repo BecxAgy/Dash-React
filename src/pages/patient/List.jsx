@@ -16,16 +16,17 @@ const List = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
+    { field: "id", headerName: "ID" },
     {
       field: "name",
-      headerName: "Name",
+      headerName: "Nome do Paciente",
       flex: 1,
       cellClassName: "name-column--cell",
     },
     { field: "crm", headerName: "CRM", flex: 1 },
     {
       field: "phone",
-      headerName: "Phone Number",
+      headerName: "telefone",
       flex: 1,
     },
     {
@@ -35,7 +36,7 @@ const List = () => {
     },
     {
       field: "Address",
-      headerName: "Address",
+      headerName: "Endereço",
       minWidth: 300,
       flex: 1,
       renderCell: (params) => (
@@ -50,15 +51,15 @@ const List = () => {
       type: "actions",
       width: 100,
       getActions: () => [
-        <GridActionsCellItem icon={<EditIcon />} label="Edit" />,
-        <GridActionsCellItem icon={<DeleteIcon />} label="Delete" />,
+        <GridActionsCellItem icon={<EditIcon />} label="Editar" />,
+        <GridActionsCellItem icon={<DeleteIcon />} label="Excluir" />,
       ],
     },
   ];
 
   return (
     <Box m="20px">
-      <Header title="Doctors" subtitle="List all doctors actives" />
+      <Header title="Patients" subtitle="List all patients" />
       <Box
         m="40px 0 0 0"
         height="68vh"
