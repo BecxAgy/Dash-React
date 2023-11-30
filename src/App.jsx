@@ -10,6 +10,7 @@ import Form from "./pages/Form";
 import Calendar from "./pages/Calendar";
 import Line from "./pages/Line";
 import Sidebar from "./components/global/Sidebar";
+import List from "./pages/doctor/List";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -19,21 +20,24 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Router>
-        <div className="app flex relative">
-          <Sidebar/>
-          <main className="content">
-            <Topbar />
-            
+          <div className="app flex relative">
+            <Sidebar />
+            <main className="content">
+              <Topbar />
+
               <Routes>
                 <Route path="/" element={<Dashboard />} />
+                {/* Doctor Routes */}
+                <Route path="/doctor/create" element={<Form />} />
+                <Route path="/doctor/list" element={<List />} />
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/form" element={<Form />} />
                 <Route path="/pie-chart" element={<Pie />} />
                 <Route path="/line-chart" element={<Line />} />
               </Routes>
-          </main>
-        </div>
-            </Router>
+            </main>
+          </div>
+        </Router>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
