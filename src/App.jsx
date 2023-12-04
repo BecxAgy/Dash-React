@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@emotion/react";
 import "./App.css";
-import { ColorModeContext, useMode } from "./theme";
+import { ColorModeContext, useMode } from "./config/theme";
 import { CssBaseline } from "@mui/material";
 import Topbar from "./components/global/Topbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -12,6 +12,8 @@ import Line from "./pages/Line";
 import Sidebar from "./components/global/Sidebar";
 import List from "./pages/doctor/List";
 import Form from "./pages/doctor/Form";
+import FormPatient from "./pages/patient/FormPatient";
+import ListPatient from "./pages/patient/ListPatient";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -32,6 +34,9 @@ function App() {
                 <Route path="/doctor/create" element={<Form />} />
                 <Route path="/doctor/list" element={<List />} />
                 <Route path="/calendar" element={<Calendar />} />
+                {/* Patient Routes */}
+                <Route path="/patient/create" element={<FormPatient />} />
+                <Route path="/patient/list" element={<ListPatient />} />
 
                 <Route path="/pie-chart" element={<Pie />} />
                 <Route path="/line-chart" element={<Line />} />
