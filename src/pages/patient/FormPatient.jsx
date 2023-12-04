@@ -4,7 +4,7 @@ import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/global/Header";
 
-const Form = () => {
+const FormPatient = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const handleFormSubmit = (values) => {
@@ -13,7 +13,10 @@ const Form = () => {
 
   return (
     <Box m="20px">
-      <Header title="Create Doctor" subtitle="Create a New Doctor in System" />
+      <Header
+        title="Create Patient"
+        subtitle="Create a New Patient in System"
+      />
 
       <Formik
         onSubmit={handleFormSubmit}
@@ -41,7 +44,7 @@ const Form = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Doctor Name"
+                label="Patient Name"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.name}
@@ -54,13 +57,13 @@ const Form = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="CRM"
+                label="CPF"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.crm}
-                name="crm"
-                error={!!touched.crm && !!errors.crm}
-                helperText={touched.crm && errors.crm}
+                value={values.cpf}
+                name="cpf"
+                error={!!touched.cpf && !!errors.cpf}
+                helperText={touched.cpf && errors.cpf}
                 sx={{ gridColumn: "span 2" }}
               />
               <TextField
@@ -197,7 +200,7 @@ const Form = () => {
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
-                Create New Doctor
+                Create New Patient
               </Button>
             </Box>
           </form>
@@ -212,7 +215,7 @@ const phoneRegExp =
 
 const checkoutSchema = yup.object().shape({
   name: yup.string().required("required"),
-  crm: yup.string().required("required"),
+  cpf: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
   phone: yup
     .string()
@@ -230,7 +233,7 @@ const checkoutSchema = yup.object().shape({
 });
 const initialValues = {
   name: "",
-  crm: "",
+  cpf: "",
   email: "",
   phone: "",
   speciality: "",
@@ -245,4 +248,4 @@ const initialValues = {
   },
 };
 
-export default Form;
+export default FormPatient;
