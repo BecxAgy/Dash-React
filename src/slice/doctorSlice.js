@@ -4,6 +4,7 @@ import doctorService from "../services/doctorService";
 const initialState = {
   doctors: [],
   doctor: {},
+  total: 0,
   error: false,
   success: false,
   loading: false,
@@ -11,8 +12,8 @@ const initialState = {
 };
 
 //slice get
-export const getDoctors = createAsyncThunk("doctor/get-all", async () => {
-  const data = await doctorService.getAllDoctors();
+export const getDoctors = createAsyncThunk("doctor/get-all", async (page) => {
+  const data = await doctorService.getAllDoctors(page);
   return data;
 });
 
@@ -76,7 +77,8 @@ export const doctorSlice = createSlice({
         state.loading = false;
         state.success = true;
         state.error = null;
-        state.doctors = action.payload;
+        state.doctors = action.payload.content;
+        state.total = action.payload.totalElements;
       })
 
       .addCase(createDoctor.pending, (state) => {

@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, MenuItem, Select, TextField } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -80,6 +80,22 @@ const Form = () => {
                 helperText={touched.email && errors.email}
                 sx={{ gridColumn: "span 2" }}
               />
+              <Select
+                value={values.speciality}
+                onBlur={handleBlur}
+                onChange={handleChange}
+                name="speciality"
+                error={!!touched.speciality && !!errors.speciality}
+                helperText={touched.speciality && errors.speciality}
+                label="Age"
+                variant="filled"
+                sx={{ gridColumn: "span 1" }}
+              >
+                <MenuItem value={"Orthopedics"}>Orthopedics</MenuItem>
+                <MenuItem value={"Cardiology"}>Cardiology</MenuItem>
+                <MenuItem value={"Gynaecology"}>Gynaecology</MenuItem>
+                <MenuItem value={"Dermatology"}>Dermatology</MenuItem>
+              </Select>
               <TextField
                 fullWidth
                 variant="filled"
@@ -222,6 +238,7 @@ const checkoutSchema = yup.object().shape({
     .string()
     .matches(phoneRegExp, "Phone number is not valid")
     .required("required"),
+  speciality: yup.string().required("required"),
   address: yup.object().shape({
     street: yup.string().required("required"),
     number: yup.string().required("required"),

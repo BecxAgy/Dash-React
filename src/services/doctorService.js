@@ -1,11 +1,12 @@
 import { doctorApi, requestConfig } from "../config/config";
 
 //get method
-const getAllDoctors = async () => {
+const getAllDoctors = async (page) => {
   const config = requestConfig("GET", null);
 
   try {
-    const res = await fetch(doctorApi + "get-all", config)
+    debugger;
+    const res = await fetch(doctorApi + "get-all?page=" + page, config)
       .then((res) => res.json())
       .catch((err) => err);
 
@@ -35,6 +36,7 @@ const createDoctor = async (data) => {
   const config = requestConfig("POST", data);
 
   try {
+    debugger;
     const res = await fetch(doctorApi + "create", config)
       .then((res) => res.json())
       .catch((err) => err);
