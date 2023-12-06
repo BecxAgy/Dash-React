@@ -56,7 +56,7 @@ const deleteDoctor = async (id) => {
   try {
     debugger;
     const res = await fetch(doctorApi + id, config)
-      .then((res) => res.json())
+      .then((res) => res)
       .catch((err) => err);
 
     return res;

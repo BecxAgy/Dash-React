@@ -30,12 +30,10 @@ const List = () => {
 
   const dispatch = useDispatch();
 
-  const handleDeleteDoctor = async () => {
+  const handleDeleteDoctor = async (param) => {
     try {
       console.log(doctor);
-      dispatch(deleteDoctor(doctor.id));
-
-      setOpen(false);
+      dispatch(deleteDoctor(param.id));
     } catch (error) {
       console.error("Erro ao deletar o médico:", error);
     }
@@ -90,8 +88,7 @@ const List = () => {
         />,
         <GridActionsCellItem
           onClick={() => {
-            setDoctor(params.row);
-            handleDeleteDoctor();
+            handleDeleteDoctor(params.row);
           }}
           icon={<DeleteIcon />}
           label="Delete"
@@ -147,7 +144,7 @@ const List = () => {
           }}
         >
           <DataGrid
-            rows={doctors}
+            rows={doctors && doctors}
             columns={columns}
             rowCount={total}
             autoPageSize

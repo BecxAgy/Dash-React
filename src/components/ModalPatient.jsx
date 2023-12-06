@@ -11,8 +11,9 @@ import { Box, TextField, useMediaQuery } from "@mui/material";
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { updateDoctor } from "../slice/doctorSlice";
+import { updatePatient } from "../slice/patientSlice";
 
-export function Modal({ open, setOpen, data, type }) {
+export function ModalPatient({ open, setOpen, data }) {
   const checkoutSchema = yup.object().shape({
     name: yup.string().required("required"),
 
@@ -28,14 +29,13 @@ export function Modal({ open, setOpen, data, type }) {
       state: yup.string().required("required"),
     }),
   });
-
-  const initialValuesDoctor = {
+  const initialValuesPatient = {
     id: data.id,
     name: data.name,
     phone: data.phone,
-    crm: data.crm,
+    cpf: data.cpf,
     email: data.email,
-    speciality: data.speciality,
+
     address: {
       street: data.address?.street,
       number: data.address?.number,
@@ -46,6 +46,7 @@ export function Modal({ open, setOpen, data, type }) {
       postalCode: data.address?.postalCode,
     },
   };
+
   const handleOpen = () => setOpen(!open);
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ export function Modal({ open, setOpen, data, type }) {
   const handleFormSubmit = (values) => {
     console.log(values);
 
-    dispatch(updateDoctor(values));
+    dispatch(updatePatient(values));
 
     handleOpen();
   };
@@ -70,7 +71,7 @@ export function Modal({ open, setOpen, data, type }) {
         <DialogBody className="text-white">
           <Formik
             onSubmit={handleFormSubmit}
-            initialValues={initialValuesDoctor}
+            initialValues={initialValuesPatient}
             validationSchema={checkoutSchema}
           >
             {({
@@ -96,7 +97,7 @@ export function Modal({ open, setOpen, data, type }) {
                     fullWidth
                     variant="filled"
                     type="text"
-                    label="Doctor Name"
+                    label="Patient Name"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.name}
@@ -105,7 +106,32 @@ export function Modal({ open, setOpen, data, type }) {
                     helperText={touched.name && errors.name}
                     sx={{ gridColumn: "span 2" }}
                   />
-
+                  <TextField
+                    fullWidth
+                    variant="filled"
+                    type="text"
+                    label="CPF"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.cpf}
+                    name="cpf"
+                    error={!!touched.cpf && !!errors.cpf}
+                    helperText={touched.cpf && errors.cpf}
+                    sx={{ gridColumn: "span 2" }}
+                  />
+                  <TextField
+                    fullWidth
+                    variant="filled"
+                    type="text"
+                    label="Email"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.email}
+                    name="email"
+                    error={!!touched.email && !!errors.email}
+                    helperText={touched.email && errors.email}
+                    sx={{ gridColumn: "span 2" }}
+                  />
                   <TextField
                     fullWidth
                     variant="filled"
@@ -259,4 +285,4 @@ export function Modal({ open, setOpen, data, type }) {
   );
 }
 
-export default Modal;
+export default ModalPatient;

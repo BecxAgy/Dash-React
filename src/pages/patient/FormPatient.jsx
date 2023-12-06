@@ -3,12 +3,15 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/global/Header";
+import { useDispatch } from "react-redux";
+import { createPatient } from "../../slice/patientSlice";
 
 const FormPatient = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
-
+  const dispatch = useDispatch();
   const handleFormSubmit = (values) => {
     console.log(values);
+    dispatch(createPatient(values));
   };
 
   return (
@@ -236,7 +239,7 @@ const initialValues = {
   cpf: "",
   email: "",
   phone: "",
-  speciality: "",
+
   address: {
     street: "",
     number: "",
