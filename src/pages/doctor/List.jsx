@@ -1,20 +1,20 @@
 /* eslint-disable react/jsx-key */
 import {
   Box,
+  Button,
   CircularProgress,
-  Skeleton,
   Typography,
   useTheme,
 } from "@mui/material";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { tokens } from "../../config/theme";
-import { mockDataListDoctor } from "../../data/mockData";
 import Header from "../../components/global/Header";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getDoctors } from "../../slice/doctorSlice";
+import { deleteDoctor, getDoctors } from "../../slice/doctorSlice";
+import Modal from "../../components/Modal";
 
 const List = () => {
   //Paginação
@@ -22,7 +22,24 @@ const List = () => {
     pageSize: 10,
     page: 0,
   });
+
+  const { page, pageSize } = paginationModel;
+  const [doctor, setDoctor] = useState({});
+
+  const [open, setOpen] = useState(false);
+
   const dispatch = useDispatch();
+
+  const handleDeleteDoctor = async () => {
+    try {
+      console.log(doctor);
+      dispatch(deleteDoctor(doctor.id));
+
+      setOpen(false);
+    } catch (error) {
+      console.error("Erro ao deletar o médico:", error);
+    }
+  };
 
   const { doctors, loading, total } = useSelector((state) => state.doctor);
   const theme = useTheme();
@@ -61,16 +78,36 @@ const List = () => {
       field: "actions",
       type: "actions",
       width: 100,
-      getActions: () => [
-        <GridActionsCellItem icon={<EditIcon />} label="Edit" />,
-        <GridActionsCellItem icon={<DeleteIcon />} label="Delete" />,
+      getActions: (params) => [
+        <GridActionsCellItem
+          on
+          onClick={() => {
+            setOpen(!open);
+            setDoctor(params.row);
+          }}
+          icon={<EditIcon />}
+          label="Edit"
+        />,
+        <GridActionsCellItem
+          onClick={() => {
+            setDoctor(params.row);
+            handleDeleteDoctor();
+          }}
+          icon={<DeleteIcon />}
+          label="Delete"
+        />,
       ],
     },
   ];
 
   useEffect(() => {
-    dispatch(getDoctors(paginationModel.page));
-  }, [dispatch, paginationModel.page]);
+    dispatch(
+      getDoctors({
+        page,
+        pageSize,
+      })
+    );
+  }, [dispatch, page, pageSize]);
 
   return (
     <Box m="20px">
@@ -113,11 +150,14 @@ const List = () => {
             rows={doctors}
             columns={columns}
             rowCount={total}
+            autoPageSize
             paginationModel={paginationModel}
             onPaginationModelChange={setPaginationModel}
+            paginationMode="server"
           />
         </Box>
       )}
+      <Modal open={open} setOpen={setOpen} data={doctor} />
     </Box>
   );
 };

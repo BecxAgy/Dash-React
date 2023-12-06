@@ -6,7 +6,10 @@ const getAllDoctors = async (page) => {
 
   try {
     debugger;
-    const res = await fetch(doctorApi + "get-all?page=" + page, config)
+    const res = await fetch(
+      doctorApi + `get-all-actives?page=${page.page}&size=${page.pageSize}`,
+      config
+    )
       .then((res) => res.json())
       .catch((err) => err);
 
@@ -36,7 +39,6 @@ const createDoctor = async (data) => {
   const config = requestConfig("POST", data);
 
   try {
-    debugger;
     const res = await fetch(doctorApi + "create", config)
       .then((res) => res.json())
       .catch((err) => err);
@@ -48,10 +50,11 @@ const createDoctor = async (data) => {
 };
 
 //delete method
-const deleteDoctor = async (id, token) => {
-  const config = requestConfig("DELETE", null, token);
+const deleteDoctor = async (id) => {
+  const config = requestConfig("DELETE", null);
 
   try {
+    debugger;
     const res = await fetch(doctorApi + id, config)
       .then((res) => res.json())
       .catch((err) => err);
@@ -63,11 +66,12 @@ const deleteDoctor = async (id, token) => {
 };
 
 //edit method
-const updateDoctor = async (id, data, token) => {
-  const config = requestConfig("PUT", data, token);
+const updateDoctor = async (id, data) => {
+  const config = requestConfig("PUT", data);
 
   try {
-    const res = await fetch(doctorApi + "find" + id, config)
+    debugger;
+    const res = await fetch(doctorApi + "find/" + id, config)
       .then((res) => res.json())
       .catch((err) => err);
 

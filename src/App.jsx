@@ -37,9 +37,6 @@ function App() {
                 {/* Patient Routes */}
                 <Route path="/patient/create" element={<FormPatient />} />
                 <Route path="/patient/list" element={<ListPatient />} />
-
-                <Route path="/pie-chart" element={<Pie />} />
-                <Route path="/line-chart" element={<Line />} />
               </Routes>
             </main>
           </div>

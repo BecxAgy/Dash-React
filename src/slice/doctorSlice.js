@@ -44,16 +44,11 @@ export const deleteDoctor = createAsyncThunk(
 
 export const updateDoctor = createAsyncThunk(
   "doctor/update",
-  async (data, thunkAPI) => {
-    const { id, doctor } = data; // Destructure os valores do objeto data
+  async (values, thunkAPI) => {
+    // Destructure dos valores do objeto data
 
-    console.log(doctor);
-
-    const response = await doctorService.updateSolictacao(id, doctor);
-
-    // if (response.error) {
-    //   return thunkAPI.rejectWithValue(response.error);
-    // }
+    debugger;
+    const response = await doctorService.updateDoctor(values.id, values);
 
     return response;
   }
