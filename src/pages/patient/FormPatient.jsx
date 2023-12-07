@@ -89,10 +89,10 @@ const FormPatient = () => {
                 label="Phone Number"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.phone}
-                name="phone"
-                error={!!touched.phone && !!errors.phone}
-                helperText={touched.phone && errors.phone}
+                value={values.telefone}
+                name="telefone"
+                error={!!touched.telefone && !!errors.telefone}
+                helperText={touched.telefone && errors.telefone}
                 sx={{ gridColumn: "span 2" }}
               />
 
@@ -220,15 +220,15 @@ const checkoutSchema = yup.object().shape({
   name: yup.string().required("required"),
   cpf: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
-  phone: yup
+  telefone: yup
     .string()
     .matches(phoneRegExp, "Phone number is not valid")
     .required("required"),
   address: yup.object().shape({
     street: yup.string().required("required"),
-    number: yup.string().required("required"),
+    
     postalCode: yup.string().required("required"),
-    complement: yup.string().required("required"),
+    
     neighborhood: yup.string().required("required"),
     city: yup.string().required("required"),
     state: yup.string().required("required"),
@@ -238,7 +238,7 @@ const initialValues = {
   name: "",
   cpf: "",
   email: "",
-  phone: "",
+  telefone: "",
 
   address: {
     street: "",

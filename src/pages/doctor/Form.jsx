@@ -241,9 +241,9 @@ const checkoutSchema = yup.object().shape({
   speciality: yup.string().required("required"),
   address: yup.object().shape({
     street: yup.string().required("required"),
-    number: yup.string().required("required"),
+    
     postalCode: yup.string().required("required"),
-    complement: yup.string().required("required"),
+    
     neighborhood: yup.string().required("required"),
     city: yup.string().required("required"),
     state: yup.string().required("required"),
