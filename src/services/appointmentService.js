@@ -1,13 +1,13 @@
 import { appointmentApi, requestConfig } from "../config/config";
 
 //get method
-const getAllDoctors = async (page) => {
+const getAllAppointments = async () => {
   const config = requestConfig("GET", null);
 
   try {
     debugger;
     const res = await fetch(
-      appointmentApi + `get-all-actives?page=${page.page}&size=${page.pageSize}`,
+      appointmentApi + `list`,
       config
     )
       .then((res) => res.json())
@@ -22,7 +22,7 @@ const getAllDoctors = async (page) => {
 
 
 //post method
-const createDoctor = async (data) => {
+const createAppointment = async (data) => {
   const config = requestConfig("POST", data);
 
   try {
@@ -37,12 +37,12 @@ const createDoctor = async (data) => {
 };
 
 //delete method
-const deleteDoctor = async (id) => {
-  const config = requestConfig("DELETE", null);
+const cancelAppointment = async (data) => {
+  const config = requestConfig("DELETE", data);
 
   try {
     debugger;
-    const res = await fetch(appointmentApi + id, config)
+    const res = await fetch(appointmentApi + "cancel", config)
       .then((res) => res)
       .catch((err) => err);
 
@@ -52,9 +52,9 @@ const deleteDoctor = async (id) => {
   }
 };
 const doctorService = {
-  getAllDoctors,
-  createDoctor,
-  deleteDoctor,
+  getAllAppointments,
+  createAppointment,
+  cancelAppointment,
  
 };
 

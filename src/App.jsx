@@ -15,6 +15,7 @@ import Form from "./pages/doctor/Form";
 import FormPatient from "./pages/patient/FormPatient";
 import ListPatient from "./pages/patient/ListPatient";
 import FormAppointment from "./pages/appointments/FormAppointment";
+import CancelAppointment from "./pages/appointments/CancelAppointment";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -41,6 +42,7 @@ function App() {
 
                 {/* Appointment Routes */}
                 <Route path="appointment/create" element={<FormAppointment/>}/>
+                <Route path="appointment/cancel" element={<CancelAppointment/>}/>
               </Routes>
             </main>
           </div>

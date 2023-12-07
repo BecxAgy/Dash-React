@@ -13,7 +13,7 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import { AddCircleOutline, ListAlt } from "@mui/icons-material";
+import { AddCircleOutline, ListAlt, TrackChanges } from "@mui/icons-material";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -163,9 +163,9 @@ const Sidebar = () => {
                 setSelected={setSelected}
               />
               <Item
-                title=" List"
-                to="/appointment/list"
-                icon={<ContactsOutlinedIcon />}
+                title=" Cancel"
+                to="/appointment/cancel"
+                icon={<TrackChanges />}
                 selected={selected}
                 setSelected={setSelected}
               />
